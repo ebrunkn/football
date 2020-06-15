@@ -24,6 +24,10 @@ class Team extends Model
         static::addGlobalScope(new DescendOrderScope);
     }
 
+    public function scopeActive($query){
+        return $query->where('active', 1);
+    }
+
     public function getTotalPlayersAttribute()
     {
         return $this->players()->count();

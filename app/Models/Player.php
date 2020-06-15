@@ -20,6 +20,10 @@ class Player extends Model
         static::addGlobalScope(new DescendOrderScope);
     }
 
+    public function scopeActive($query){
+        return $query->where('active', 1);
+    }
+
     public function scopeOfTeam($query, $teamId){
         if($teamId){
            return $query->where('team_id', $teamId); 

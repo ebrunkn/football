@@ -21,14 +21,17 @@ class PlayerController extends Controller
 
     public function add(Request $request){
         $data_bundle = [];
-        $data_bundle['teams'] = Team::pluck('name','id');
+        $data_bundle['teams'] = Team::active()->get();
+        $data_bundle['teams'] = $data_bundle['teams']->where('total_players','<', Team::TOTAL_PLAYERS)->pluck('name','id');
         return view(ThemeFallBack::fallBack('player.add'), compact('data_bundle'));
     }
 
     public function edit(Request $request, $id){
         $data_bundle = [];
         $data_bundle['player'] = Player::findOrFail($id);
-        $data_bundle['teams'] = Team::pluck('name','id');
+        $data_bundle['teams'] = Team::active()->get();
+        $data_bundle['teams'] = $data_bundle['teams']->where('total_players','<', Team::TOTAL_PLAYERS)->pluck('name','id');
+
         return view(ThemeFallBack::fallBack('player.edit'), compact('data_bundle'));
     }
 
