@@ -14,5 +14,34 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::namespace('Admin')->group(function () {
-    Route::get('/', 'DashboardController@index');
+
+    Route::get('login', 'LoginController@login')->name('login');
+    Route::post('login', 'LoginController@loginProcess');
+
+    Route::middleware('admin')->group(function () {
+
+        Route::get('logout', 'LoginController@logout');
+        Route::get('/', 'DashboardController@index');
+
+        Route::prefix('teams')->group(function(){
+            Route::get('/', 'TeamController@index');
+            Route::get('add', 'TeamController@add');
+            Route::get('edit/{id}', 'TeamController@edit');
+            Route::post('save/{id?}', 'TeamController@save');
+            Route::get('delete/{id}', 'TeamController@delete');
+            Route::get('players/{teamId}', 'PlayerController@index');
+            Route::get('assign/{teamId}', 'PlayerController@assign');
+            Route::post('assign/{teamId}', 'PlayerController@assignSave');
+        });
+
+        Route::prefix('players')->group(function(){
+            Route::get('/', 'PlayerController@index');
+            Route::get('add', 'PlayerController@add');
+            Route::get('edit/{id}', 'PlayerController@edit');
+            Route::post('save/{id?}', 'PlayerController@save');
+            Route::get('delete/{id}', 'PlayerController@delete');
+        });
+
+    });
+    
 });

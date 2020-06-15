@@ -12,6 +12,6 @@ class AppLog extends Model
      * @var array
      */
     protected $fillable = [
-        'admin_id', 'log',
+        'admin_id', 'model', 'action', 'log',
     ];
 }

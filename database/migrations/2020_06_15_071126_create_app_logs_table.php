@@ -16,6 +16,8 @@ class CreateAppLogsTable extends Migration
         Schema::create('app_logs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('admin_id')->constrained('admins');
+            $table->string('model')->nullable();
+            $table->string('action')->nullable();
             $table->text('log');
             $table->timestamps();
         });
