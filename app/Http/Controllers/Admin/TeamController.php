@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AssignRequest;
 use App\Http\Requests\TeamRequest;
 use App\Models\AppLog;
 use App\Models\Helper\ThemeFallBack;
+use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
@@ -53,4 +55,46 @@ class TeamController extends Controller
         Team::destroy($id);
         return redirect()->back()->with('item-delete', true);
     }
+
+    public function assign(Request $request, $teamId=false){
+        $data_bundle = [];
+        if($teamId){
+            $data_bundle['team']  = Team::findOrFail($teamId);
+        }else{
+            $data_bundle['teams']  = Team::pluck('name','id');
+        }
+        $data_bundle['players']  = Player::unassigned()->pluck('name','id');
+
+        return view(ThemeFallBack::fallBack('team.assign'), compact('data_bundle'));
+        // return redirect()->back()->with('item-delete', true);
+    }
+
+    public function assignSave(AssignRequest $request){
+
+        $validated = $request->validated();
+
+        $player = Player::unassigned()->where('id', $validated['player'])->first();
+        $team = Team::where('id', $validated['team'])->first();
+
+        if($team && $player){
+            $player->team_id = $team->id;
+            $player->save();
+
+            return response()->json([
+                'code' => 200,
+                'status' => 'OK',
+                'message' => 'Data Saved',
+            ], 200);
+
+        }else{
+            return response()->json([
+                'code' => 403,
+                'status' => 'Error',
+                'message' => 'Data conflict',
+            ], 403);
+        }
+        
+        
+    }
+
 }

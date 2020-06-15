@@ -24,10 +24,12 @@
                     
                     @if(app('request')->teamId) Of A Team 
 
-                      <a href="{{url('players/assign')}}" class="btn btn-sm btn-success float-right ml-2">
-                        <i class="mdi mdi-link-variant"></i>
-                        Assign A Player
-                      </a>
+                      @if($data_bundle['players']->count() < $data_bundle['allowed_players'])
+                        <a href="{{url('teams/assign', array(app('request')->teamId))}}" class="btn btn-sm btn-success float-right ml-2">
+                          <i class="mdi mdi-link-variant"></i>
+                          Assign A Player
+                        </a>
+                      @endif
 
                     @endif
 
@@ -51,7 +53,7 @@
 
                         </thead>
                         <tbody>
-                          @foreach($data_bundle['players'] as $player)
+                          @forelse($data_bundle['players'] as $player)
                             <tr>
                               <td class="">
                                 {{$player->name}}
@@ -72,7 +74,13 @@
 
                               </td>
                             </tr>
-                          @endforeach
+                          @empty
+                            <tr>
+                              <td colspan="4" class="text-center">
+                                <h4 class="my-5">No Players Found</h4>
+                              </td>
+                            </tr>
+                          @endforelse
                         </tbody>
                       </table>
                     </div>

@@ -17,8 +17,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(AdminTableSeeder::class);
-        $this->call(TeamTableSeeder::class);
-        $this->call(PlayerTableSeeder::class);
+        // $this->call(TeamTableSeeder::class);
+        // $this->call(PlayerTableSeeder::class);
     }
 }
 
@@ -70,7 +70,7 @@ class PlayerTableSeeder extends Seeder
 
         foreach(range(1,10) as $player){
             $datatToInsert[] = [
-                'team_id' => $teams[rand(0,4)]['id'],
+                // 'team_id' => $teams[rand(0,4)]['id'],
                 'name' => 'Player '.$player,
                 'active' => 1,
                 'created_at'=> Carbon::now(),

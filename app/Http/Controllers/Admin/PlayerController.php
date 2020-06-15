@@ -16,6 +16,7 @@ class PlayerController extends Controller
     public function index(Request $request, $teamId=false){
         $data_bundle = [];
         $data_bundle['players'] = Player::ofTeam($teamId)->paginate(20);
+        $data_bundle['allowed_players'] = Team::TOTAL_PLAYERS;
         return view(ThemeFallBack::fallBack('player.index'), compact('data_bundle'));
     }
 

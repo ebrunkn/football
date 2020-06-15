@@ -24,6 +24,10 @@ class Player extends Model
         return $query->where('active', 1);
     }
 
+    public function scopeUnassigned($query){
+        return $query->whereNull('team_id'); 
+    }
+
     public function scopeOfTeam($query, $teamId){
         if($teamId){
            return $query->where('team_id', $teamId); 

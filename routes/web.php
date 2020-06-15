@@ -22,6 +22,7 @@ Route::namespace('Admin')->group(function () {
 
         Route::get('logout', 'LoginController@logout');
         Route::get('/', 'DashboardController@index');
+        Route::get('/ajax-data', 'DashboardController@ajaxData');
 
         Route::prefix('teams')->group(function(){
             Route::get('/', 'TeamController@index');
@@ -29,9 +30,9 @@ Route::namespace('Admin')->group(function () {
             Route::get('edit/{id}', 'TeamController@edit');
             Route::post('save/{id?}', 'TeamController@save');
             Route::get('delete/{id}', 'TeamController@delete');
+            Route::get('assign/{teamId?}', 'TeamController@assign');
+            Route::post('assign', 'TeamController@assignSave');
             Route::get('players/{teamId}', 'PlayerController@index');
-            Route::get('assign/{teamId}', 'PlayerController@assign');
-            Route::post('assign/{teamId}', 'PlayerController@assignSave');
         });
 
         Route::prefix('players')->group(function(){

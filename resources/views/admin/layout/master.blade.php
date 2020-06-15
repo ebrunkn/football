@@ -273,7 +273,7 @@
                         <small class="text-muted d-block">Copyright © {{Carbon::now()->year}} <a
                                 href="#" target="_blank">Football</a>. All rights
                             reserved</small>
-                        <small class="text-gray mt-2">Handcrafted With iotics<i
+                        <small class="text-gray mt-2">Handcrafted With Transporter<i
                                 class="mdi mdi-heart text-danger"></i></small>
                     </div>
                 </div>

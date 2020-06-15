@@ -40,10 +40,12 @@
 
                         </thead>
                         <tbody>
-                          @foreach($data_bundle['teams'] as $team)
+                          @forelse($data_bundle['teams'] as $team)
                             <tr>
                               <td class="">
-                                {{$team->name}}
+                                <a href="{{ url('teams/players', array($team->id)) }}">
+                                  {{$team->name ?? 'NA'}}
+                                </a>
                               </td>
                               <td>{{$team->total_players ?? 0}}</td>
                               <td>{{$team->status_label}}</td>
@@ -58,7 +60,13 @@
 
                               </td>
                             </tr>
-                          @endforeach
+                          @empty
+                            <tr>
+                              <td colspan="4" class="text-center">
+                                <h4 class="my-5">No Teams Found</h4>
+                              </td>
+                            </tr>
+                          @endforelse
                         </tbody>
                       </table>
                     </div>

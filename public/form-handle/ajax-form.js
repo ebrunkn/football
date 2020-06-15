@@ -23,12 +23,12 @@ $(document).ready(function(){
         form.find('.invalid-feedback').removeClass('d-inline').html('');
         form.find('.is-invalid').removeClass('is-invalid');
         sendData =  form.serializeArray();
-        var bactToUrl;
-        if(callback){
-            bactToUrl = callback;
-        }else{
-            bactToUrl = url;
-        }
+        // var bactToUrl;
+        // if(callback){
+        //     bactToUrl = callback;
+        // }else{
+        //     bactToUrl = url;
+        // }
 
         $.ajax({
             type: "POST",
@@ -38,15 +38,18 @@ $(document).ready(function(){
             success: function(result)
             {
                 if( result.status == 'OK' ) {
-                    window.location.href = bactToUrl;                    
+                    toastr.success('Data saved', 'Done!')
+                    window.location.href = callback;             
                 }
                 else {
                     toastr.error('Something went wrong!', 'Error!')
-                    $('.form-submit-btn').prop('disabled', false);
-                    $('.form-submit-btn').find('.label').removeClass('d-none');
-                    $('.form-submit-btn').find('.preloader').addClass('d-none');
                     console.log( result );
                 }
+
+                $('.form-submit-btn').prop('disabled', false);
+                $('.form-submit-btn').find('.label').removeClass('d-none');
+                $('.form-submit-btn').find('.preloader').addClass('d-none');
+
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 // console.log(XMLHttpRequest);
@@ -80,6 +83,22 @@ $(document).ready(function(){
         var callback = form.attr('callback') ? form.attr('callback'): url;
         formSave(form, url, callback)
     });
+
+
+    // function dashboardData(url){
+    //     $.ajax({
+    //         type: "GET",
+    //         url: url,
+    //         dataType: 'json',
+    //         success: function(result)
+    //         {
+    //             console.log( result );
+    //         },
+    //         error: function(XMLHttpRequest, textStatus, errorThrown) {
+    //             console.log( result );
+    //         }
+    //     });
+    // }
 
     // ===========================Delete Items=============================
 
