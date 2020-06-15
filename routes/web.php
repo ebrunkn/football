@@ -13,6 +13,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::namespace('Admin')->group(function () {
+    Route::get('/', 'DashboardController@index');
 });

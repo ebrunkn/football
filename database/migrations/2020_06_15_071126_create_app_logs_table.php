@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePlayersTable extends Migration
+class CreateAppLogsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class CreatePlayersTable extends Migration
      */
     public function up()
     {
-        Schema::create('players', function (Blueprint $table) {
+        Schema::create('app_logs', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('team_id')->constrained('teams')->nullable();
-            $table->string('name');
-            $table->boolean('active')->default(1);
+            $table->foreignId('admin_id')->constrained('admins');
+            $table->text('log');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -31,7 +29,7 @@ class CreatePlayersTable extends Migration
     public function down()
     {
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('players');
+        Schema::dropIfExists('app_logs');
         Schema::enableForeignKeyConstraints();
     }
 }
