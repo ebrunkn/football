@@ -24,13 +24,6 @@ $(document).ready(function(){
         form.find('.is-invalid').removeClass('is-invalid');
         sendData =  form.serializeArray();
         // console.log(sendData);
-        // var bactToUrl;
-        // if(callback){
-        //     bactToUrl = callback;
-        // }else{
-        //     bactToUrl = url;
-        // }
-
         $.ajax({
             type: "POST",
             url: url,

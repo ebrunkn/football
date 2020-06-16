@@ -104,8 +104,8 @@ class TeamController extends Controller
     }
     public function downloadSample() 
     {
-        $sample = storage_path('app\public\team-sample.xlsx');
-        return response()->download($sample, 'Team Sample.xlsx');
+        $sample = storage_path('app\public\teams-sample.xlsx');
+        return response()->download($sample, 'Team Excel Template.xlsx');
     }
     public function importToDB(Request $request) 
     {
