@@ -44,7 +44,11 @@
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
                                                 {!! Form::file('data_file') !!}
-                                                <span class="invalid-feedback" id="form-error-name"></span>
+                                                @if ($errors->any())
+                                                    @foreach ($errors->all() as $error)
+                                                        <span class="invalid-feedback d-block">{{ $error }}</span>
+                                                    @endforeach
+                                                @endif
                                             </div>
                                         </div>
                                         

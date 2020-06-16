@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\FileImportRequest;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\TeamImport;
 use App\Imports\PlayerImport;
@@ -25,7 +26,7 @@ class DataImportController extends Controller
             return response()->download($sample, 'Team Excel Template.xlsx');
         }
     }
-    public function importToDB(Request $request, $type) 
+    public function importToDB(FileImportRequest $request, $type) 
     {
         if($type == 'players'){
             Excel::import(new PlayerImport, $request->file('data_file'));
