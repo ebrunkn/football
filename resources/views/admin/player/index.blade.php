@@ -34,9 +34,13 @@
                     @endif
 
 
-                    <a href="{{url('players/add')}}" class="btn btn-sm btn-success float-right">
+                    <a href="{{url('players/add')}}" class="btn btn-sm btn-success float-right ml-2">
                       <i class="mdi mdi-plus"></i>
                       Add New Player
+                    </a>
+                    <a href="{{url('imports', array('players'))}}" class="btn btn-sm btn-success float-right">
+                      <i class="mdi mdi-file-excel"></i>
+                      Import
                     </a>
                   </p>
                   <div class="item-wrapper">

@@ -9,7 +9,11 @@
                     <a href="#">Dashboard</a>
                 </li>
                 <li class="breadcrumb-item">
-                    <a href="#">Team</a>
+                    @if(app('request')->type == 'players')
+                        <a href="#">Player</a>
+                    @else
+                        <a href="#">Team</a>
+                    @endif
                 </li>
                 <li class="breadcrumb-item active" aria-current="page">Import</li>
             </ol>
@@ -21,7 +25,7 @@
                 <div class="grid">
                     <p class="grid-header">
                         Bulk Import (Excel Format)
-                        <a href="{{url('teams/sample-excel')}}" class="btn btn-sm btn-info float-right">
+                        <a href="{{url('imports/sample-excel', array(app('request')->type))}}" class="btn btn-sm btn-info float-right">
                         <i class="mdi mdi-file-excel"></i>
                             Download Sample Excel
                         </a>
@@ -32,11 +36,11 @@
 
                                 <div class="col-md-8 mx-auto">
 
-                                    {!! Form::open(array('id'=>'data-form','class'=>'','url'=> url('teams/import'), 'files' => true, 'callback'=> url('teams'))) !!}
+                                    {!! Form::open(array('id'=>'data-form','class'=>'','url'=> url('imports', array(app('request')->type)), 'files' => true, 'callback'=> url('imports'))) !!}
                                         
                                         <div class="form-group row showcase_row_area">
                                             <div class="col-md-3 showcase_text_area">
-                                                <label for="inputType1">Team Name</label>
+                                                <label for="inputType1">Excel File</label>
                                             </div>
                                             <div class="col-md-9 showcase_content_area">
                                                 {!! Form::file('data_file') !!}
@@ -67,15 +71,20 @@
             </div>
         </div>
     </div>
+
+@stop
+
+@push('page-specific-js-lib')
     {!! Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js') !!}
     {!! Html::script('form-handle/ajax-form.js') !!}
-    @push('page-specific-script')
+@endpush
+
+@push('page-specific-script')
     <script>
         $('.add-more').click(function(e) {
-        e.preventDefault();
-        console.log('Clicked');
-        $('#contact-person-item').children().clone().appendTo('.contacts');
-    })
+            e.preventDefault();
+            console.log('Clicked');
+            $('#contact-person-item').children().clone().appendTo('.contacts');
+        })
     </script>
-    @endpush
-    @stop
+@endpush

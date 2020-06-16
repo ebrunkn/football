@@ -10,9 +10,6 @@ use App\Models\Helper\ThemeFallBack;
 use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
-use App\Imports\TeamImport;
-use Illuminate\Support\Facades\Log;
 
 class TeamController extends Controller
 {
@@ -96,22 +93,7 @@ class TeamController extends Controller
             ], 403);
         }
         
-        
-    }
-    public function import() 
-    {
-        return view(ThemeFallBack::fallBack('import.file-upload'));
-    }
-    public function downloadSample() 
-    {
-        $sample = storage_path('app\public\teams-sample.xlsx');
-        return response()->download($sample, 'Team Excel Template.xlsx');
-    }
-    public function importToDB(Request $request) 
-    {
-        Excel::import(new TeamImport, $request->file('data_file'));
-        return redirect()->back()->with('success', 'All good!')->with('form-save', true);
     }
     
-
+    
 }

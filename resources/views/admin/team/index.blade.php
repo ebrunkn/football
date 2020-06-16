@@ -25,7 +25,7 @@
                       <i class="mdi mdi-plus"></i>
                       Add New
                     </a>
-                    <a href="{{url('teams/import')}}" class="btn btn-sm btn-success float-right">
+                    <a href="{{url('imports', array('teams'))}}" class="btn btn-sm btn-success float-right">
                       <i class="mdi mdi-file-excel"></i>
                       Import
                     </a>

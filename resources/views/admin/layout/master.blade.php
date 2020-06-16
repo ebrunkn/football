@@ -180,10 +180,10 @@
                     </a>
                     <ul class="collapse navigation-submenu @if(request()->path() == 'requirement/food' || request()->path() == 'requirement/food/add') show @endif" id="food-nav">
                         <li>
-                            <a href="{{url('teams/import')}}">Import Teams</a>
+                            <a href="{{url('imports', array('teams'))}}">Import Teams</a>
                         </li>
                         <li>
-                            <a href="{{url('players/import')}}">Import Players</a>
+                            <a href="{{url('imports', array('players'))}}">Import Players</a>
                         </li>
                     </ul>
                 </li>

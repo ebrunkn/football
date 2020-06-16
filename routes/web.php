@@ -33,9 +33,6 @@ Route::namespace('Admin')->group(function () {
             Route::get('assign/{teamId?}', 'TeamController@assign');
             Route::post('assign', 'TeamController@assignSave');
             Route::get('players/{teamId}', 'PlayerController@index');
-            Route::get('import', 'TeamController@import');
-            Route::get('sample-excel', 'TeamController@downloadSample');
-            Route::post('import', 'TeamController@importToDB');
         });
 
         Route::prefix('players')->group(function(){
@@ -44,6 +41,12 @@ Route::namespace('Admin')->group(function () {
             Route::get('edit/{id}', 'PlayerController@edit');
             Route::post('save/{id?}', 'PlayerController@save');
             Route::get('delete/{id}', 'PlayerController@delete');
+        });
+
+        Route::prefix('imports')->group(function(){
+            Route::get('/{type}', 'DataImportController@import');
+            Route::post('/{type}', 'DataImportController@importToDB');
+            Route::get('sample-excel/{type}', 'DataImportController@downloadSample');
         });
 
     });
