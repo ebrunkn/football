@@ -21,9 +21,13 @@
                 <div class="grid">
                   <p class="grid-header">
                     Team List
-                    <a href="{{url('teams/add')}}" class="btn btn-sm btn-success float-right">
+                    <a href="{{url('teams/add')}}" class="btn btn-sm btn-success float-right ml-2">
                       <i class="mdi mdi-plus"></i>
                       Add New
+                    </a>
+                    <a href="{{url('teams/import')}}" class="btn btn-sm btn-success float-right">
+                      <i class="mdi mdi-file-excel"></i>
+                      Import
                     </a>
                   </p>
                   <div class="item-wrapper">

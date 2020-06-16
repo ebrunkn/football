@@ -33,6 +33,9 @@ Route::namespace('Admin')->group(function () {
             Route::get('assign/{teamId?}', 'TeamController@assign');
             Route::post('assign', 'TeamController@assignSave');
             Route::get('players/{teamId}', 'PlayerController@index');
+            Route::get('import', 'TeamController@import');
+            Route::get('sample-excel', 'TeamController@downloadSample');
+            Route::post('import', 'TeamController@importToDB');
         });
 
         Route::prefix('players')->group(function(){

@@ -17,7 +17,7 @@ class Team extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['team_id', 'name', 'active'];
+    protected $fillable = ['name', 'active'];
 
     protected static function booted()
     {

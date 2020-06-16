@@ -23,6 +23,7 @@ $(document).ready(function(){
         form.find('.invalid-feedback').removeClass('d-inline').html('');
         form.find('.is-invalid').removeClass('is-invalid');
         sendData =  form.serializeArray();
+        // console.log(sendData);
         // var bactToUrl;
         // if(callback){
         //     bactToUrl = callback;
@@ -43,7 +44,7 @@ $(document).ready(function(){
                 }
                 else {
                     toastr.error('Something went wrong!', 'Error!')
-                    console.log( result );
+                    // console.log( result );
                 }
 
                 $('.form-submit-btn').prop('disabled', false);
@@ -67,7 +68,7 @@ $(document).ready(function(){
                     $('.form-submit-btn').prop('disabled', false);
                     $('.form-submit-btn').find('.label').removeClass('d-none');
                     $('.form-submit-btn').find('.preloader').addClass('d-none');
-                    console.log( result );
+                    console.log( errorThrown );
                 }
              }
           });
@@ -83,22 +84,6 @@ $(document).ready(function(){
         var callback = form.attr('callback') ? form.attr('callback'): url;
         formSave(form, url, callback)
     });
-
-
-    // function dashboardData(url){
-    //     $.ajax({
-    //         type: "GET",
-    //         url: url,
-    //         dataType: 'json',
-    //         success: function(result)
-    //         {
-    //             console.log( result );
-    //         },
-    //         error: function(XMLHttpRequest, textStatus, errorThrown) {
-    //             console.log( result );
-    //         }
-    //     });
-    // }
 
     // ===========================Delete Items=============================
 
