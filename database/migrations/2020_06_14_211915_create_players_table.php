@@ -17,6 +17,7 @@ class CreatePlayersTable extends Migration
             $table->id();
             $table->foreignId('team_id')->nullable()->constrained('teams');
             $table->string('name');
+            $table->tinyInteger('type')->unsigned()->nullable();
             $table->boolean('active')->default(1);
             $table->timestamps();
             $table->softDeletes();

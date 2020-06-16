@@ -32,8 +32,7 @@
                       @endif
 
                     @endif
-
-
+                    
                     <a href="{{url('players/add')}}" class="btn btn-sm btn-success float-right ml-2">
                       <i class="mdi mdi-plus"></i>
                       Add New Player
@@ -51,6 +50,7 @@
                           <tr>
                             <th>Player Name</th>
                             <th>Assigned Team</th>
+                            <th>Type</th>
                             <th>Status</th>
                             <th></th>
                           </tr>
@@ -67,9 +67,13 @@
                                   {{$player->team['name'] ?? 'NA'}}
                                 </a>
                               </td>
+                              <td>{{$player->player_type_label}}</td>
                               <td>{{$player->status_label}}</td>
-                              <td class="actions">
+                              <td class="actions text-right">
                                 
+                                @if($player->type == 1)
+                                  <a href="{{url('teams/substitute', array($player->id))}}" class="btn btn-xs btn-info">Substitute</a>
+                                @endif
                                 <a href="#" class="btn btn-xs btn-danger" data-toggle="popover" data-html="true" data-placement="left" title="Do you want delete?"
                                  data-content='<a class="btn btn-xs btn-success" href="{{url('players/delete', array($player->id))}}">Yes</a> <a class="btn btn-xs btn-danger" href="#">No</a>'>
                                   <i class="mdi mdi-trash-can"></i>

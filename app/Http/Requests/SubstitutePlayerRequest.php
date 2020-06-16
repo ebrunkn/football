@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class PlayerRequest extends FormRequest
+class SubstitutePlayerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,11 +24,8 @@ class PlayerRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'exists:players,id',
-            // 'team' => 'exists:teams,id',
-            'type' => 'required_with:team',
-            'name' => 'required',
-            'status' => 'required',
+            'main_player'=> 'required|exists:players,id',
+            'sub_player'=> 'required|exists:players,id',
         ];
     }
 }

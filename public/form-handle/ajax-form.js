@@ -55,6 +55,11 @@ $(document).ready(function(){
                     $('.form-submit-btn').prop('disabled', false);
                     $('.form-submit-btn').find('.label').removeClass('d-none');
                     $('.form-submit-btn').find('.preloader').addClass('d-none');
+                }else if(XMLHttpRequest.status == 406){
+                    toastr.warning(XMLHttpRequest.responseJSON.message, 'Not Accepatable')
+                    $('.form-submit-btn').prop('disabled', false);
+                    $('.form-submit-btn').find('.label').removeClass('d-none');
+                    $('.form-submit-btn').find('.preloader').addClass('d-none');
                     showErrors(XMLHttpRequest.responseJSON);
                 }else {
                     toastr.error('Something went wrong!', 'Error!')

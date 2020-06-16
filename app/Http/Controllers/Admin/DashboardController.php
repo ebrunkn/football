@@ -27,8 +27,8 @@ class DashboardController extends Controller
         $data['players']['total'] = $players->count(); 
         $data['players']['active'] = $players->where('active',1)->count(); 
         $data['players']['inactive'] = $players->where('active',0)->count(); 
-        $data['players']['on_team'] = $players->where('team_id',null)->count(); 
-        $data['players']['not_in_team'] = $players->where('team_id','!=',null)->count(); 
+        $data['players']['not_in_team'] = $players->where('team_id',null)->count(); 
+        $data['players']['on_team'] = $players->where('team_id','!=',null)->count(); 
 
         $data['teams']['total'] = $teams->count(); 
         $data['teams']['active'] = $teams->where('active',1)->count(); 

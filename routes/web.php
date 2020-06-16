@@ -33,6 +33,8 @@ Route::namespace('Admin')->group(function () {
             Route::get('assign/{teamId?}', 'TeamController@assign');
             Route::post('assign', 'TeamController@assignSave');
             Route::get('players/{teamId}', 'PlayerController@index');
+            Route::get('substitute/{playerId}', 'PlayerController@substitute');
+            Route::post('substitute', 'PlayerController@substituteSave');
         });
 
         Route::prefix('players')->group(function(){

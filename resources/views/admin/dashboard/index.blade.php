@@ -22,61 +22,55 @@
             <div class="grid">
               <div class="grid-body text-gray">
                 <div class="text-center">
-                  <h3 class="d-flex align-items-center justify-content-center ajax-element total_players">
-                    
+                  <h3 class="ajax-element">
+                    <small>Total Players</small>
+                    <br>
+                    <span class="total_players"></span>
+                  </h3>
+                  <h3 class="ajax-element">
+                    <small>Active Players</small>
+                    <br>
+                    <span class="active_players"></span>
+                  </h3>
+                  <h3 class="ajax-element">
+                    <small>Blocked Players</small>
+                    <br>
+                    <span class="inactive_players"></span>
                   </h3>
                 </div>
                 <hr>
-                <p class="text-black text-center"><a href="buildings" class="">Players</a></p>
+                <p class="text-black text-center"><a href="{{ url('players') }}" class="">Players</a></p>
               </div>
             </div>
-          </div>
+		</div>
 
 
         <div class="col-md-4 col-12 equel-grid">
-          <div class="grid">
-            <div class="grid-body text-gray">
-              <div class="text-center">
-                <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['food_request']['received'] ?? 'no value'}} <small> &nbsp; Total Requests</small>
-                </h3>
-                <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['food_request']['completed'] ?? 'no value'}} <small> &nbsp; Completed Requests</small>
-                </h3>
-                <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['food_request']['processing'] ?? 'no value'}} <small> &nbsp; Processing Requests</small>
-                </h3>
-                <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['food_request']['pending'] ?? 'no value'}} <small> &nbsp; Pending Requests</small>
-                </h3>
+            <div class="grid">
+              <div class="grid-body text-gray">
+                <div class="text-center">
+                  <h3 class="ajax-element">
+                    <small>Total Teams</small>
+                    <br>
+                    <span class="total_teams"></span>
+                  </h3>
+                  <h3 class="ajax-element">
+                    <small>Active Teams</small>
+                    <br>
+                    <span class="active_teams"></span>
+                  </h3>
+                  <h3 class="ajax-element">
+                    <small>Blocked Teams</small>
+                    <br>
+                    <span class="inactive_teams"></span>
+                  </h3>
+                </div>
+                <hr>
+                <p class="text-black text-center"><a href="{{ url('teams') }}" class="">Teams</a></p>
               </div>
-              <hr>
-              <p class="text-black text-center"><a href="requirement/food" class="">Food Requests</a></p>
             </div>
-          </div>
-        </div>
-        <div class="col-md-4 col-12 equel-grid">
-          <div class="grid">
-            <div class="grid-body text-gray">
-              <div class="text-center">
-                <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['warehouse_request']['received'] ?? 'no value'}} &nbsp; <small> Total Requests</small>
-                </h3>
-                <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['warehouse_request']['completed'] ?? 'no value'}} &nbsp; <small> Completed Requests</small>
-                </h3>
-                <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['warehouse_request']['processing'] ?? 'no value'}} <small> &nbsp; Processing Requests</small>
-                </h3>
-                <h3 class="d-flex align-items-center justify-content-center">
-                  {{$data_bundle['warehouse_request']['pending'] ?? 'no value'}} &nbsp; <small> Pending Requests</small>
-                </h3>
-              </div>
-              <hr>
-              <p class="text-black text-center"><a href="requirement/warehouse" class="">Warehouse Requests</a></p>
-            </div>
-          </div>
-        </div>
+		</div>
+		
       </div>
     </div>
   </div>
@@ -104,7 +98,7 @@
 <script>
 	$(document).ready(function(){
 		
-		$('.ajax-element').html('<small>Loading Data</small>');
+		$('.ajax-element').find('span').html('<small>Loading Data</small>');
 
 		function dashboardData(url){
 			$.ajax({
@@ -115,6 +109,12 @@
 				{
 					console.log( result.data );
 					$('.total_players').html(result.data.players.total ?? 0);
+					$('.active_players').html(result.data.players.active ?? 0);
+					$('.inactive_players').html(result.data.players.inactive ?? 0);
+
+					$('.total_teams').html(result.data.teams.total ?? 0);
+					$('.active_teams').html(result.data.teams.active ?? 0);
+					$('.inactive_teams').html(result.data.teams.inactive ?? 0);
 				},
 				error: function(XMLHttpRequest, textStatus, errorThrown) {
 					console.log( result );

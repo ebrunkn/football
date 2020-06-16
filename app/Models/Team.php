@@ -11,9 +11,9 @@ class Team extends Model
 {
     const ACTIVE = 1;
     const BLOCK = 0;
-    const TOTAL_PLAYERS = 18;
-    const MAIN_PLAYERS = 11;
-    const SUB_PLAYERS = 7;
+    const TOTAL_PLAYERS = 5;
+    const MAIN_PLAYERS = 3;
+    const SUB_PLAYERS = 2;
 
     use SoftDeletes;
 
