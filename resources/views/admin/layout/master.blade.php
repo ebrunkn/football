@@ -147,7 +147,7 @@
                 <li>
                     <a href="#buildings-nav" data-toggle="collapse" aria-expanded="false">
                     <span class="link-title">Teams</span>
-                        <i class="mdi mdi-hospital-building link-icon"></i>
+                        <i class="mdi mdi-star-circle link-icon"></i>
                     </a>
                     <ul class="collapse navigation-submenu @if(request()->path() == 'buildings' || request()->path() == 'buildings/add') show @endif" id="buildings-nav">
                         <li>
@@ -156,12 +156,15 @@
                         <li>
                             <a href="{{url('teams/add')}}">Add New</a>
                         </li>
+                        <li>
+                            <a href="{{url('teams/assign')}}">Assign a player</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
                     <a href="#stock-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Players</span>
-                        <i class="mdi mdi-factory link-icon"></i>
+                        <i class="mdi mdi-account-multiple link-icon"></i>
                     </a>
                     <ul class="collapse navigation-submenu @if(request()->path() == 'stock' || request()->path() == 'stock/add') show @endif" id="stock-nav">
                         <li>
@@ -175,67 +178,28 @@
 
                 <li>
                     <a href="#food-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Food Request</span>
-                        <i class="mdi mdi-food link-icon"></i>
+                        <span class="link-title">Import</span>
+                        <i class="mdi mdi-cloud-download link-icon"></i>
                     </a>
                     <ul class="collapse navigation-submenu @if(request()->path() == 'requirement/food' || request()->path() == 'requirement/food/add') show @endif" id="food-nav">
                         <li>
-                            <a href="{{url('requirement/food')}}">View All Request</a>
+                            <a href="{{url('imports', array('teams'))}}">Import Teams</a>
                         </li>
                         <li>
-                            <a href="{{url('requirement/food/add')}}">Order Food</a>
+                            <a href="{{url('imports', array('players'))}}">Import Players</a>
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#warehouse-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Warehouse Request</span>
-                        <i class="mdi mdi-webhook link-icon"></i>
-                    </a>
-                    <ul class="collapse navigation-submenu @if(request()->path() == 'requirement/warehouse' || request()->path() == 'requirement/warehouse/add') show @endif" id="warehouse-nav">
-                        <li>
-                            <a href="{{url('requirement/warehouse')}}">View All Request</a>
-                        </li>
-                        <li>
-                            <a href="{{url('requirement/warehouse/add')}}">Order Items</a>
-                        </li>
-                    </ul>
-                </li>
-
 
                 <li>
-                    <a href="#delivery-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Door Delivery</span>
-                        <i class="mdi mdi-truck-delivery link-icon"></i>
+                    <a href="{{ url('logs') }}" aria-expanded="false">
+                        <span class="link-title">Log</span>
+                        <i class="mdi mdi-tumblr-reblog link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu @if(request()->path() == 'delivery/*') show @endif" id="delivery-nav">
-                        <li>
-                            <a href="{{url('delivery/requirements')}}">List Requests</a>
-                        </li>
-                        {{-- <li>
-                            <a href="{{url('delivery/add')}}">List Items</a>
-                        </li> --}}
-                    </ul>
                 </li>
-
-
-                <li>
-                    <a href="#call-logs-nav" data-toggle="collapse" aria-expanded="false">
-                        <span class="link-title">Call Logs</span>
-                        <i class="mdi mdi-phone link-icon"></i>
-                    </a>
-                    <ul class="collapse navigation-submenu @if(request()->path() == 'call-logs/*') show @endif" id="call-logs-nav">
-                        <li>
-                            <a href="{{url('call-logs')}}">List Calls</a>
-                        </li>
-                        <li>
-                            <a href="{{url('call-logs/add')}}">Add New</a>
-                        </li>
-                    </ul>
-                </li>
-
 
                 <li class="nav-category-divider">DOCS</li>
+
                 <li>
                     <a href="#">
                         <span class="link-title">Documentation</span>
@@ -273,7 +237,7 @@
                         <small class="text-muted d-block">Copyright © {{Carbon::now()->year}} <a
                                 href="#" target="_blank">Football</a>. All rights
                             reserved</small>
-                        <small class="text-gray mt-2">Handcrafted With iotics<i
+                        <small class="text-gray mt-2">Handcrafted With Transporter<i
                                 class="mdi mdi-heart text-danger"></i></small>
                     </div>
                 </div>
@@ -286,7 +250,7 @@
     <!-- SCRIPT LOADING START FORM HERE /////////////-->
     <!-- plugins:js -->
     {!! Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js') !!}
-    {!! Html::script('admin/vendors/axios/axios.min.js') !!}
+    {{-- {!! Html::script('admin/vendors/axios/axios.min.js') !!} --}}
     {!! Html::script('admin/vendors/js/core.js') !!}
     {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js') !!}
     <!-- endinject -->

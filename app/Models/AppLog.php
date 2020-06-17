@@ -14,4 +14,8 @@ class AppLog extends Model
     protected $fillable = [
         'admin_id', 'model', 'action', 'log',
     ];
+
+    public function admin(){
+        return $this->belongsTo('App\Models\Admin','admin_id','id');
+    }
 }

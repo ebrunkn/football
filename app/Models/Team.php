@@ -11,17 +11,21 @@ class Team extends Model
 {
     const ACTIVE = 1;
     const BLOCK = 0;
-    const TOTAL_PLAYERS = 18;
-    const MAIN_PLAYERS = 11;
-    const SUB_PLAYERS = 7;
+    const TOTAL_PLAYERS = 5;
+    const MAIN_PLAYERS = 3;
+    const SUB_PLAYERS = 2;
 
     use SoftDeletes;
 
-    protected $fillable = ['team_id', 'name', 'active'];
+    protected $fillable = ['name', 'active'];
 
     protected static function booted()
     {
         static::addGlobalScope(new DescendOrderScope);
+    }
+
+    public function scopeActive($query){
+        return $query->where('active', 1);
     }
 
     public function getTotalPlayersAttribute()

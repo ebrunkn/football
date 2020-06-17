@@ -24,10 +24,11 @@ class PlayerRequest extends FormRequest
     public function rules()
     {
         return [
-            'id'=>'exists:players,id',
-            'team_id'=>'exists:teams,id',
-            'name'=>'required',
-            'status'=>'required',
+            'id' => 'exists:players,id',
+            // 'team' => 'exists:teams,id',
+            'type' => 'required_with:team',
+            'name' => 'required',
+            'status' => 'required',
         ];
     }
 }

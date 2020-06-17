@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\AppLogReport;
+use App\Events\PlayerLogReport;
+use App\Events\TeamLogReport;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\AssignRequest;
 use App\Http\Requests\TeamRequest;
 use App\Models\AppLog;
 use App\Models\Helper\ThemeFallBack;
+use App\Models\Player;
 use App\Models\Team;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
 class TeamController extends Controller
 {
@@ -35,12 +39,9 @@ class TeamController extends Controller
                 ['id' => $id],
                 ['name' => $request->input('name'), 'active' => $request->input('status'),]
             );
-            AppLog::create(array(
-                'admin_id' => auth()->guard('admin')->user()->id,
-                'model' => 'Team',
-                'action' => $id ? 'Edit' : 'Create',
-                'log' => $team,
-            ));
+
+            event(new TeamLogReport($team, $id ? 'edit' : 'create'));
+
             return response()->json([
                 'code' => 200,
                 'status' => 'OK',
@@ -50,7 +51,54 @@ class TeamController extends Controller
     }
 
     public function delete(Request $request, $id){
+        $team = Team::findOrFail($id);
         Team::destroy($id);
+        event(new TeamLogReport($team, 'delete'));
         return redirect()->back()->with('item-delete', true);
     }
+
+    public function assign(Request $request, $teamId=false){
+        $data_bundle = [];
+        if($teamId){
+            $data_bundle['team']  = Team::findOrFail($teamId);
+        }else{
+            $data_bundle['teams']  = Team::pluck('name','id');
+        }
+        $data_bundle['players']  = Player::unassigned()->pluck('name','id');
+
+        return view(ThemeFallBack::fallBack('team.assign'), compact('data_bundle'));
+        // return redirect()->back()->with('item-delete', true);
+    }
+
+    public function assignSave(AssignRequest $request){
+
+        $validated = $request->validated();
+
+        $player = Player::unassigned()->where('id', $validated['player'])->first();
+        $team = Team::where('id', $validated['team'])->first();
+
+        if($team && $player){
+            $player->team_id = $team->id;
+            $player->save();
+
+            event(new TeamLogReport($team, 'assign'));
+            event(new PlayerLogReport($player, 'assign'));
+
+            return response()->json([
+                'code' => 200,
+                'status' => 'OK',
+                'message' => 'Data Saved',
+            ], 200);
+
+        }else{
+            return response()->json([
+                'code' => 403,
+                'status' => 'Error',
+                'message' => 'Data conflict',
+            ], 403);
+        }
+        
+    }
+    
+    
 }

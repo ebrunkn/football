@@ -23,13 +23,7 @@ $(document).ready(function(){
         form.find('.invalid-feedback').removeClass('d-inline').html('');
         form.find('.is-invalid').removeClass('is-invalid');
         sendData =  form.serializeArray();
-        var bactToUrl;
-        if(callback){
-            bactToUrl = callback;
-        }else{
-            bactToUrl = url;
-        }
-
+        // console.log(sendData);
         $.ajax({
             type: "POST",
             url: url,
@@ -38,15 +32,18 @@ $(document).ready(function(){
             success: function(result)
             {
                 if( result.status == 'OK' ) {
-                    window.location.href = bactToUrl;                    
+                    toastr.success('Data saved', 'Done!')
+                    window.location.href = callback;             
                 }
                 else {
                     toastr.error('Something went wrong!', 'Error!')
-                    $('.form-submit-btn').prop('disabled', false);
-                    $('.form-submit-btn').find('.label').removeClass('d-none');
-                    $('.form-submit-btn').find('.preloader').addClass('d-none');
-                    console.log( result );
+                    // console.log( result );
                 }
+
+                $('.form-submit-btn').prop('disabled', false);
+                $('.form-submit-btn').find('.label').removeClass('d-none');
+                $('.form-submit-btn').find('.preloader').addClass('d-none');
+
             },
             error: function(XMLHttpRequest, textStatus, errorThrown) {
                 // console.log(XMLHttpRequest);
@@ -58,13 +55,18 @@ $(document).ready(function(){
                     $('.form-submit-btn').prop('disabled', false);
                     $('.form-submit-btn').find('.label').removeClass('d-none');
                     $('.form-submit-btn').find('.preloader').addClass('d-none');
+                }else if(XMLHttpRequest.status == 406){
+                    toastr.warning(XMLHttpRequest.responseJSON.message, 'Not Accepatable')
+                    $('.form-submit-btn').prop('disabled', false);
+                    $('.form-submit-btn').find('.label').removeClass('d-none');
+                    $('.form-submit-btn').find('.preloader').addClass('d-none');
                     showErrors(XMLHttpRequest.responseJSON);
                 }else {
                     toastr.error('Something went wrong!', 'Error!')
                     $('.form-submit-btn').prop('disabled', false);
                     $('.form-submit-btn').find('.label').removeClass('d-none');
                     $('.form-submit-btn').find('.preloader').addClass('d-none');
-                    console.log( result );
+                    console.log( errorThrown );
                 }
              }
           });

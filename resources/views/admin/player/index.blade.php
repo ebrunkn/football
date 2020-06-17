@@ -24,17 +24,22 @@
                     
                     @if(app('request')->teamId) Of A Team 
 
-                      <a href="{{url('players/assign')}}" class="btn btn-sm btn-success float-right ml-2">
-                        <i class="mdi mdi-link-variant"></i>
-                        Assign A Player
-                      </a>
+                      @if($data_bundle['players']->count() < $data_bundle['allowed_players'])
+                        <a href="{{url('teams/assign', array(app('request')->teamId))}}" class="btn btn-sm btn-success float-right ml-2">
+                          <i class="mdi mdi-link-variant"></i>
+                          Assign A Player
+                        </a>
+                      @endif
 
                     @endif
-
-
-                    <a href="{{url('players/add')}}" class="btn btn-sm btn-success float-right">
+                    
+                    <a href="{{url('players/add')}}" class="btn btn-sm btn-success float-right ml-2">
                       <i class="mdi mdi-plus"></i>
                       Add New Player
+                    </a>
+                    <a href="{{url('imports', array('players'))}}" class="btn btn-sm btn-success float-right">
+                      <i class="mdi mdi-file-excel"></i>
+                      Import
                     </a>
                   </p>
                   <div class="item-wrapper">
@@ -45,13 +50,14 @@
                           <tr>
                             <th>Player Name</th>
                             <th>Assigned Team</th>
+                            <th>Type</th>
                             <th>Status</th>
                             <th></th>
                           </tr>
 
                         </thead>
                         <tbody>
-                          @foreach($data_bundle['players'] as $player)
+                          @forelse($data_bundle['players'] as $player)
                             <tr>
                               <td class="">
                                 {{$player->name}}
@@ -61,9 +67,13 @@
                                   {{$player->team['name'] ?? 'NA'}}
                                 </a>
                               </td>
+                              <td>{{$player->player_type_label}}</td>
                               <td>{{$player->status_label}}</td>
-                              <td class="actions">
+                              <td class="actions text-right">
                                 
+                                @if($player->type == 1)
+                                  <a href="{{url('teams/substitute', array($player->id))}}" class="btn btn-xs btn-info">Substitute</a>
+                                @endif
                                 <a href="#" class="btn btn-xs btn-danger" data-toggle="popover" data-html="true" data-placement="left" title="Do you want delete?"
                                  data-content='<a class="btn btn-xs btn-success" href="{{url('players/delete', array($player->id))}}">Yes</a> <a class="btn btn-xs btn-danger" href="#">No</a>'>
                                   <i class="mdi mdi-trash-can"></i>
@@ -72,7 +82,13 @@
 
                               </td>
                             </tr>
-                          @endforeach
+                          @empty
+                            <tr>
+                              <td colspan="4" class="text-center">
+                                <h4 class="my-5">No Players Found</h4>
+                              </td>
+                            </tr>
+                          @endforelse
                         </tbody>
                       </table>
                     </div>
