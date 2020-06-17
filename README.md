@@ -1,4 +1,4 @@
-# Football
+# Football Team Management Application
 Laravel Development
 This is a basic application to manage football team and its players.
 ### Tech
