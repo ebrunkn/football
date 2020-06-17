@@ -34,7 +34,7 @@ class TeamController extends Controller
 
             return response()->json([
                 'status' => 'OK',
-                'message' => 'Data Saved',
+                'message' => 'Player assigned',
             ], 200);
 
         }else{
