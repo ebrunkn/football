@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\AppLogReport;
+use App\Events\PlayerLogReport;
+use App\Events\TeamLogReport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\AssignRequest;
 use App\Http\Requests\TeamRequest;
@@ -36,12 +39,9 @@ class TeamController extends Controller
                 ['id' => $id],
                 ['name' => $request->input('name'), 'active' => $request->input('status'),]
             );
-            AppLog::create(array(
-                'admin_id' => auth()->guard('admin')->user()->id,
-                'model' => 'Team',
-                'action' => $id ? 'Edit' : 'Create',
-                'log' => $team,
-            ));
+
+            event(new TeamLogReport($team, $id ? 'edit' : 'create'));
+
             return response()->json([
                 'code' => 200,
                 'status' => 'OK',
@@ -53,12 +53,7 @@ class TeamController extends Controller
     public function delete(Request $request, $id){
         $team = Team::findOrFail($id);
         Team::destroy($id);
-        AppLog::create(array(
-            'admin_id' => auth()->guard('admin')->user()->id,
-            'model' => 'Team',
-            'action' => 'Delete',
-            'log' => $team,
-        ));
+        event(new TeamLogReport($team, 'delete'));
         return redirect()->back()->with('item-delete', true);
     }
 
@@ -86,12 +81,8 @@ class TeamController extends Controller
             $player->team_id = $team->id;
             $player->save();
 
-            AppLog::create(array(
-                'admin_id' => auth()->guard('admin')->user()->id,
-                'model' => 'Team',
-                'action' => 'Assigned',
-                'log' => $team,
-            ));
+            event(new TeamLogReport($team, 'assign'));
+            event(new PlayerLogReport($player, 'assign'));
 
             return response()->json([
                 'code' => 200,

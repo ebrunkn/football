@@ -156,6 +156,9 @@
                         <li>
                             <a href="{{url('teams/add')}}">Add New</a>
                         </li>
+                        <li>
+                            <a href="{{url('teams/assign')}}">Assign a player</a>
+                        </li>
                     </ul>
                 </li>
                 <li>
@@ -191,7 +194,7 @@
                 <li>
                     <a href="{{ url('logs') }}" aria-expanded="false">
                         <span class="link-title">Log</span>
-                        <i class="mdi mdi-cloud-download link-icon"></i>
+                        <i class="mdi mdi-tumblr-reblog link-icon"></i>
                     </a>
                 </li>
 

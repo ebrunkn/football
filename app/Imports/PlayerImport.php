@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Events\PlayerLogReport;
 use App\Models\Player;
 use Maatwebsite\Excel\Row;
 use Maatwebsite\Excel\Concerns\OnEachRow;
@@ -25,10 +26,12 @@ class PlayerImport implements OnEachRow
         
         if(isset($row[0]) && $rowIndex > 0 && $row[0] != 'Player Name'){
             // dd($rowIndex);
-            Player::create([
+            $player = Player::create([
                 'name' => $row[0],
                 'active' => $status_label[trim(strtolower($row[1])) ?? 'block'] ?? 0,
             ]);
+
+            event(new PlayerLogReport($player, 'Data Import'));
         }
     }
 }

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Events\AppLogReport;
+use App\Events\PlayerLogReport;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PlayerRequest;
 use App\Http\Requests\SubstitutePlayerRequest;
@@ -39,10 +41,6 @@ class PlayerController extends Controller
 
     public function save(PlayerRequest $request, $id = false)
     {
-            // $validated = $request->validated();
-            // dd($request->input('team'));
-
-
             if($request->input('team')){
                 $players = Player::where('team_id',$request->input('team'))->get();
                 $totalPlayers = $players->count();
@@ -72,12 +70,9 @@ class PlayerController extends Controller
                     'active' => $request->input('status'),
                 ]
             );
-            AppLog::create(array(
-                'admin_id' => auth()->guard('admin')->user()->id,
-                'model' => 'Player',
-                'action' => $id ? 'Edit' : 'Create',
-                'log' => $player,
-            ));
+            
+            event(new PlayerLogReport($player, $id ? 'edit' : 'create'));
+
             return response()->json([
                 'code' => 200,
                 'status' => 'OK',
@@ -87,7 +82,9 @@ class PlayerController extends Controller
     }
 
     public function delete(Request $request, $id){
+        $player = Player::findOrFail($id);
         Player::destroy($id);
+        event(new PlayerLogReport($player, 'delete'));
         return redirect()->back()->with('item-delete', true);
     }
 
@@ -108,6 +105,9 @@ class PlayerController extends Controller
 
         $sub_player->type = Player::MAIN_PLAYER;
         $sub_player->save();
+
+        event(new PlayerLogReport($main_player, 'move to substitute'));
+        event(new PlayerLogReport($sub_player, 'move to main'));
 
         return response()->json([
             'code' => 200,

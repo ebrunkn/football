@@ -2,6 +2,7 @@
 
 namespace App\Imports;
 
+use App\Events\TeamLogReport;
 use App\Models\Team;
 use Carbon\Carbon;
 use Maatwebsite\Excel\Row;
@@ -26,10 +27,12 @@ class TeamImport implements OnEachRow
         
         if(isset($row[0]) && $rowIndex > 0 && $row[0] != 'Team Name'){
             // dd($rowIndex);
-            Team::create([
+            $team = Team::create([
                 'name' => $row[0],
                 'active' => $status_label[trim(strtolower($row[1])) ?? 'block'] ?? 0,
             ]);
+
+            event(new TeamLogReport($team, 'Data Import'));
         }
     }
 }
