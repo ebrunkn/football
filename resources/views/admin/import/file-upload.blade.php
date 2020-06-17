@@ -79,7 +79,6 @@
 @stop
 
 @push('page-specific-js-lib')
-    {!! Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js') !!}
     {!! Html::script('form-handle/ajax-form.js') !!}
 @endpush
 

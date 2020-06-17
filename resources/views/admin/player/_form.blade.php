@@ -54,14 +54,19 @@
 
     <script>
         $(document).ready(function(){
+            loadPlayerTypeRow($('.team-dropdown').val());
             $('.team-dropdown').on('change', function(e){
-                if($(this).val()){
-                    $('#player-type-form-row').removeClass('d-none');
-                }else{
-                    $('#player-type-form-row').addClass('d-none');
-                }
+                loadPlayerTypeRow($(this).val());
             });
         });
+
+        function loadPlayerTypeRow(val){
+            if(val){
+                $('#player-type-form-row').removeClass('d-none');
+            }else{
+                $('#player-type-form-row').addClass('d-none');
+            }
+        }
     </script>
 
 @endpush

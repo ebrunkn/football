@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(AdminTableSeeder::class);
-        // $this->call(TeamTableSeeder::class);
-        // $this->call(PlayerTableSeeder::class);
+        $this->call(TeamTableSeeder::class);
+        $this->call(PlayerTableSeeder::class);
     }
 }
 
@@ -37,7 +37,7 @@ class AdminTableSeeder extends Seeder
 		Admin::create(array(
 			// 'location_id' => $faker->numberBetween(1, 5),
 			'name' => 'Ebrahim',
-			'email' => 'ebru.nkn@gmail.com',
+			'email' => 'demo@admin.com',
 			'password' => Hash::make('password'),
 		));
 

@@ -250,7 +250,7 @@
     <!-- SCRIPT LOADING START FORM HERE /////////////-->
     <!-- plugins:js -->
     {!! Html::script('https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js') !!}
-    {!! Html::script('admin/vendors/axios/axios.min.js') !!}
+    {{-- {!! Html::script('admin/vendors/axios/axios.min.js') !!} --}}
     {!! Html::script('admin/vendors/js/core.js') !!}
     {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js') !!}
     <!-- endinject -->
