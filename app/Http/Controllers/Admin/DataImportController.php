@@ -19,10 +19,10 @@ class DataImportController extends Controller
     public function downloadSample(Request $request, $type) 
     {
         if($type == 'players'){
-            $sample = storage_path('app\public\players-sample.xlsx');
+            $sample = storage_path('app/public/players-sample.xlsx');
             return response()->download($sample, 'Players Excel Template.xlsx');
         }else{
-            $sample = storage_path('app\public\teams-sample.xlsx');
+            $sample = storage_path('app/public/teams-sample.xlsx');
             return response()->download($sample, 'Team Excel Template.xlsx');
         }
     }
