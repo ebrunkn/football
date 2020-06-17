@@ -73,6 +73,7 @@ Application is currently developed with the following plugins. Instructions on h
 | ------ | ------ |
 | laravelcollective/html | https://laravelcollective.com/docs/6.0/html |
 | maatwebsite/excel | https://laravel-excel.com/ |
+| laravel/passport | https://laravel.com/docs/7.x/passport#introduction |
 
 #### Front-end
 
