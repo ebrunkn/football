@@ -51,7 +51,14 @@ class TeamController extends Controller
     }
 
     public function delete(Request $request, $id){
+        $team = Team::findOrFail($id);
         Team::destroy($id);
+        AppLog::create(array(
+            'admin_id' => auth()->guard('admin')->user()->id,
+            'model' => 'Team',
+            'action' => 'Delete',
+            'log' => $team,
+        ));
         return redirect()->back()->with('item-delete', true);
     }
 
@@ -78,6 +85,13 @@ class TeamController extends Controller
         if($team && $player){
             $player->team_id = $team->id;
             $player->save();
+
+            AppLog::create(array(
+                'admin_id' => auth()->guard('admin')->user()->id,
+                'model' => 'Team',
+                'action' => 'Assigned',
+                'log' => $team,
+            ));
 
             return response()->json([
                 'code' => 200,

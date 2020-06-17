@@ -51,6 +51,8 @@ Route::namespace('Admin')->group(function () {
             Route::get('sample-excel/{type}', 'DataImportController@downloadSample');
         });
 
+        Route::get('logs', 'LogController@index');
+
     });
     
 });

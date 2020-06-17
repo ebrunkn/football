@@ -188,6 +188,13 @@
                     </ul>
                 </li>
 
+                <li>
+                    <a href="{{ url('logs') }}" aria-expanded="false">
+                        <span class="link-title">Log</span>
+                        <i class="mdi mdi-cloud-download link-icon"></i>
+                    </a>
+                </li>
+
                 <li class="nav-category-divider">DOCS</li>
 
                 <li>
