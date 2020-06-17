@@ -2,12 +2,13 @@
 Laravel Development
 This is a basic application to manage football team and its players.
 ### Tech
-Application uses a number of open source libraries/applications to work properly:
-* [PHP 7.2.5]
-* [Laravel 7.x] - PHP MVC framework.
-* [MySQL] - Database
-* [Bootstrap 4] - CSS framework for responsive
-
+* PHP 7.2.5
+* MySQL - Database
+* Laravel 7.x - PHP MVC framework.
+* HTML 5
+* Bootstrap 4 - CSS framework for responsive UI
+* jQuery
+* Ajax
 ### Installation
 Pull the code from repo [Repo](https://github.com/ebrunkn/football.git) to your local directory.
 Create a databse in your MySQL.
@@ -16,9 +17,9 @@ Create .env file on root folder from .env.example and update it with below param
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=database_name
-DB_USERNAME=database_username
-DB_PASSWORD=database_password
+DB_DATABASE=your_database_name
+DB_USERNAME=your_database_username
+DB_PASSWORD=your_database_password
 
 ADMIN_THEME=admin
 ```
@@ -41,6 +42,11 @@ Create a DB Schema with only admin data
 ```sh
 $ php artisan migrate:fresh
 $ php artisan db:seed --class=AdminTableSeeder
+```
+### Passport installation (For API calls)
+Run below commands on terminal.
+```sh
+$ php artisan passport:install
 ```
 
 ### Run the application
@@ -73,4 +79,4 @@ Application is currently developed with the following plugins. Instructions on h
 | Plugin | URL |
 | ------ | ------ |
 | Bootstrap 4 | https://getbootstrap.com/ |
-| maatwebsite/excel | https://laravel-excel.com/ |
+| MD Icons | https://cdn.materialdesignicons.com/1.1.34/ |

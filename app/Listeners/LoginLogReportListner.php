@@ -28,7 +28,7 @@ class LoginLogReportListner
     public function handle(LoginLogReport $event)
     {
         AppLog::create([
-            'admin_id' => auth()->guard('admin')->user()->id ?? null,
+            'admin_id' => auth()->guard('admin')->user()->id ?? auth()->guard('adminapi')->user()->id ?? null,
             'model' => 'Admin',
             'action' => collect($event)['action'] ?? null,
             'log' => collect($event),

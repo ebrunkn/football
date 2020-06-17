@@ -28,7 +28,7 @@ class PlayerLogReportListner
     public function handle(PlayerLogReport $event)
     {
         AppLog::create([
-            'admin_id' => auth()->guard('admin')->user()->id,
+            'admin_id' => auth()->guard('admin')->user()->id ?? auth()->guard('adminapi')->user()->id ?? null,
             'model' => 'Player',
             'action' => collect($event)['action'] ?? null,
             'log' => collect($event),
