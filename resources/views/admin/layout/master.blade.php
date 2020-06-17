@@ -145,11 +145,11 @@
                 </li>
 
                 <li>
-                    <a href="#buildings-nav" data-toggle="collapse" aria-expanded="false">
+                    <a href="#teams-nav" data-toggle="collapse" aria-expanded="false">
                     <span class="link-title">Teams</span>
                         <i class="mdi mdi-star-circle link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu @if(request()->path() == 'buildings' || request()->path() == 'buildings/add') show @endif" id="buildings-nav">
+                    <ul class="collapse navigation-submenu @if(request()->path() == 'teams' || request()->path() == 'teams/add'  || request()->path() == 'teams/assign') show @endif" id="teams-nav">
                         <li>
                             <a href="{{url('teams')}}">View All</a>
                         </li>
@@ -162,11 +162,11 @@
                     </ul>
                 </li>
                 <li>
-                    <a href="#stock-nav" data-toggle="collapse" aria-expanded="false">
+                    <a href="#players-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Players</span>
                         <i class="mdi mdi-account-multiple link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu @if(request()->path() == 'stock' || request()->path() == 'stock/add') show @endif" id="stock-nav">
+                    <ul class="collapse navigation-submenu @if(request()->path() == 'players' || request()->path() == 'players/add') show @endif" id="players-nav">
                         <li>
                             <a href="{{url('players')}}">View All</a>
                         </li>
@@ -177,11 +177,11 @@
                 </li>
 
                 <li>
-                    <a href="#food-nav" data-toggle="collapse" aria-expanded="false">
+                    <a href="#imports-nav" data-toggle="collapse" aria-expanded="false">
                         <span class="link-title">Import</span>
                         <i class="mdi mdi-cloud-download link-icon"></i>
                     </a>
-                    <ul class="collapse navigation-submenu @if(request()->path() == 'requirement/food' || request()->path() == 'requirement/food/add') show @endif" id="food-nav">
+                    <ul class="collapse navigation-submenu @if(request()->path() == 'imports/teams' || request()->path() == 'imports/players') show @endif" id="imports-nav">
                         <li>
                             <a href="{{url('imports', array('teams'))}}">Import Teams</a>
                         </li>
@@ -195,15 +195,6 @@
                     <a href="{{ url('logs') }}" aria-expanded="false">
                         <span class="link-title">Log</span>
                         <i class="mdi mdi-tumblr-reblog link-icon"></i>
-                    </a>
-                </li>
-
-                <li class="nav-category-divider">DOCS</li>
-
-                <li>
-                    <a href="#">
-                        <span class="link-title">Documentation</span>
-                        <i class="mdi mdi-asterisk link-icon"></i>
                     </a>
                 </li>
             </ul>
